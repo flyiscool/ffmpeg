@@ -30,6 +30,11 @@ static MI_S32 Hdmi_callback_impl(MI_HDMI_DeviceId_e eHdmi, MI_HDMI_EventType_e E
 #include "SAT070CP50_1024x600.h"
 #endif
 
+#if ST7703_720X1280
+#include "ST7703_720X1280_MIPI.h"
+#endif
+
+
 #endif
 
 int sd20x_panel_init(MI_DISP_Interface_e eType, HDMI_Out_e outMode)

@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "rcS": "powershell",
+        "*.JLinkScript": "arm",
+        "sat070cp50_1024x600.h": "c"
+    }
+}

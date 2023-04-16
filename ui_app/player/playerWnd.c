@@ -32,7 +32,7 @@
 #include "mi_disp.h"
 #include "mi_panel.h"
 
-#include "SAT070CP50_1024x600.h"
+#include "ST7703_720X1280_MIPI.h.h"
 #include "usbdetect.h"
 #include "frame.h"
 #include "demux.h"
@@ -52,8 +52,8 @@
 
 #define TABLESIZE(table)    (sizeof(table)/sizeof(table[0]))
 
-#define DIR_TYPE        "ÎÄ¼þ¼Ð"
-#define FILE_TYPE       "ÎÄ¼þ"
+#define DIR_TYPE        "ï¿½Ä¼ï¿½ï¿½ï¿½"
+#define FILE_TYPE       "ï¿½Ä¼ï¿½"
 #define COL_DIV         16
 #define COL_GAP         2
 #define ROW_HEIGHT      40
@@ -158,7 +158,7 @@ static int g_bigMonth[] = {1, 3, 5, 7, 8, 10, 12};
 // listview items
 static char * g_lv_caption[] =
 {
-    "Ãû³Æ", "ÀàÐÍ", "´óÐ¡", "Ê±¼ä"
+    "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½ï¿½ï¿½", "ï¿½ï¿½Ð¡", "Ê±ï¿½ï¿½"
 };
 
 static int g_colDiv[] =
@@ -586,19 +586,19 @@ static char *getDayOfWeek(int day)
     switch (day)
     {
         case 0:
-            return "ÖÜÈÕ";
+            return "ï¿½ï¿½ï¿½ï¿½";
         case 1:
-            return "ÖÜÒ»";
+            return "ï¿½ï¿½Ò»";
         case 2:
-            return "ÖÜ¶þ";
+            return "ï¿½Ü¶ï¿½";
         case 3:
-            return "ÖÜÈý";
+            return "ï¿½ï¿½ï¿½ï¿½";
         case 4:
-            return "ÖÜËÄ";
+            return "ï¿½ï¿½ï¿½ï¿½";
         case 5:
-            return "ÖÜÎå";
+            return "ï¿½ï¿½ï¿½ï¿½";
         case 6:
-            return "ÖÜÁù";
+            return "ï¿½ï¿½ï¿½ï¿½";
     }
 
     printf("invalid day %d\n", day);
@@ -981,7 +981,7 @@ MI_S32 PlayComplete()
     g_bPlaying = FALSE;
     g_bPause   = TRUE;
 
-	//ÎÄ¼þÁ÷»Øµ½¿ªÊ¼Î»ÖÃ,ÔÝ¶¨µÈ´ý
+	//ï¿½Ä¼ï¿½ï¿½ï¿½ï¿½Øµï¿½ï¿½ï¿½Ê¼Î»ï¿½ï¿½,ï¿½Ý¶ï¿½ï¿½È´ï¿½
 	g_pstPlayStat->seek_flags = AVSEEK_FLAG_FRAME;
 	//printf("start_time of audio file : %lld.\n", g_pstPlayStat->p_fmt_ctx->start_time);
 	stream_seek(g_pstPlayStat, g_pstPlayStat->p_fmt_ctx->start_time, 0, 0);
@@ -1321,7 +1321,7 @@ static void lv_notify(mWidget *self, int id, int nc, DWORD add_data)
 			_c(pTimeObj)->setProperty(pTimeObj, NCSP_STATIC_ALIGN, NCS_ALIGN_RIGHT);
 			_c(pTimeObj)->setProperty(pTimeObj, NCSP_WIDGET_TEXT, (DWORD)time_info);
 			InvalidateRect(pTimeObj->hwnd, NULL, TRUE);
-			//³õÊ¼»¯1Ãë¶¨Ê±Æ÷
+			//ï¿½ï¿½Ê¼ï¿½ï¿½1ï¿½ë¶¨Ê±ï¿½ï¿½
 			SetTimer((mWidget *)pTimeObj->hwnd, IDC_PLAYFILE_STATIC_PLAY_TIME, 100);
 		}
         else
@@ -1465,7 +1465,7 @@ static void play_btn_notify(mWidget *button, int id, int nc, DWORD add_data)
 //        }
 		if (g_bShowPlayToolBar)
 		{
-			toggle_pause(g_pstPlayStat);            // ÅÐ¶Ï²¢ÉèÖÃÔÝÍ£/²¥·Å×´Ì¬
+			toggle_pause(g_pstPlayStat);            // ï¿½Ð¶Ï²ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í£/ï¿½ï¿½ï¿½ï¿½×´Ì¬
 			printf("video pause status : %d.\n", g_pstPlayStat->paused);
 			if (g_pstPlayStat->paused) {
 			    SetBtnImg(pBtnObj, &g_play_btn);
@@ -1500,7 +1500,7 @@ static void stop_btn_notify(mWidget *button, int id, int nc, DWORD add_data)
 	        g_bPlaying = FALSE;
 	        g_bPause   = FALSE;
 			g_bShowPlayToolBar = FALSE;
-			//×¢Ïú1Ãë¶¨Ê±Æ÷
+			//×¢ï¿½ï¿½1ï¿½ë¶¨Ê±ï¿½ï¿½
 			KillTimer(pTimeObj->hwnd, IDC_PLAYFILE_STATIC_PLAY_TIME);
 
 			if (g_pstPlayStat->audio_idx >= 0 && g_pstPlayStat->video_idx < 0)
@@ -1695,7 +1695,7 @@ static void playfast_btn_notify(mWidget *button, int id, int nc, DWORD add_data)
 //		printf("curFont: %s-%s-%s-size%d\n", curFont->type, curFont->family, curFont->charset, curFont->size);
 //		SelectFont(HDC_SCREEN, g_font_fft);
 //		SetBkMode (HDC_SCREEN, BM_TRANSPARENT);
-//		TextOut (HDC_SCREEN, 600, 520, "hahaha,¹þ¹þ¹þ");
+//		TextOut (HDC_SCREEN, 600, 520, "hahaha,ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½");
 //		curFont = GetCurFont(HDC_SCREEN);
 //		printf("select Font: %s-%s-%s-size%d-regular\n", g_font_fft->type, g_font_fft->family, g_font_fft->charset, g_font_fft->size);
 //		printf("curFont: %s-%s-%s-size%d\n", curFont->type, curFont->family, curFont->charset, curFont->size);
@@ -1708,7 +1708,7 @@ static void playfast_btn_notify(mWidget *button, int id, int nc, DWORD add_data)
 
 			if (isnan(pos))
 				pos = (double)g_pstPlayStat->seek_pos / AV_TIME_BASE;
-			pos += incr;   //Ã¿´Î¿ì½ø5Ãë
+			pos += incr;   //Ã¿ï¿½Î¿ï¿½ï¿½5ï¿½ï¿½
 			if (g_pstPlayStat->p_fmt_ctx->start_time != AV_NOPTS_VALUE && pos > g_pstPlayStat->p_fmt_ctx->duration / (double)AV_TIME_BASE)
 				pos = g_pstPlayStat->p_fmt_ctx->duration / (double)AV_TIME_BASE;
 			g_pstPlayStat->seek_flags = AVSEEK_FLAG_FRAME;
@@ -1770,14 +1770,14 @@ static void play_trk_notify(mTrackBar* self, int id, int code, DWORD add_data)
 				t_value  = _c(pVideoObj)->getProperty(pVideoObj, NCSP_TRKBAR_CURPOS);
 				position = g_pstPlayStat->p_fmt_ctx->duration / play_trk_props[1].value * t_value;
 				if (g_pstPlayStat->video_idx >= 0)
-					s_time = g_pstPlayStat->video_clk.pts;      //»ñÈ¡µ±Ç°Ê±¼ä´Á
+					s_time = g_pstPlayStat->video_clk.pts;      //ï¿½ï¿½È¡ï¿½ï¿½Ç°Ê±ï¿½ï¿½ï¿½
 				else if (g_pstPlayStat->audio_idx >= 0)
 					s_time = g_pstPlayStat->audio_clk.pts;
 				if (position >= 0 && position <= g_pstPlayStat->p_fmt_ctx->duration) 
 				{
 					position += g_pstPlayStat->p_fmt_ctx->start_time;				
 					offset = position - s_time * AV_TIME_BASE;
-					//µ±Ìø×ª½ø¶È´óÓÚ3ÃëÊ±²ÅÖ´ÐÐÌø×ª,·ÀÖ¹ÆÆ»µÕý³£½ø¶È½øÐÐ
+					//ï¿½ï¿½ï¿½ï¿½×ªï¿½ï¿½ï¿½È´ï¿½ï¿½ï¿½3ï¿½ï¿½Ê±ï¿½ï¿½Ö´ï¿½ï¿½ï¿½ï¿½×ª,ï¿½ï¿½Ö¹ï¿½Æ»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½È½ï¿½ï¿½ï¿½
 					if (offset > 3000000 || offset < -3000000)
 					{
 						g_jumpflag = TRUE;
@@ -1845,7 +1845,7 @@ static BOOL onTimer(mWidget *widget, int message, int id, DWORD tick)
 	mTrackBar *pProgressObj = (mTrackBar*)ncsGetChildObj(hMainPlayFileWnd, IDC_PLAYFILE_TRACKBAR_PLAY_PROGRESS);
 	mStatic *pFpsObj = (mStatic*)ncsGetChildObj(hMainPlayFileWnd, IDC_PLAYFILE_STATIC_FPS);
 
-	//¼ÆËãÊÓÆµµ±Ç°²¥·ÅÊ±¼ä
+	//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Æµï¿½ï¿½Ç°ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½
 	if (g_pstPlayStat->video_idx >= 0)
 		time = g_pstPlayStat->video_clk.pts;
 	else if (g_pstPlayStat->audio_idx >= 0)
@@ -1856,7 +1856,7 @@ static BOOL onTimer(mWidget *widget, int message, int id, DWORD tick)
 	sprintf(tmpstr, "%02d:%02d:%02d", (hours % 24), (minute % 60), (second % 60));
 	memcpy(time_info, tmpstr, 8);
 
-	//ÉèÖÃUIÊôÐÔ
+	//ï¿½ï¿½ï¿½ï¿½UIï¿½ï¿½ï¿½ï¿½
 	_c(pTimeObj)->setProperty(pTimeObj, NCSP_STATIC_ALIGN, NCS_ALIGN_RIGHT);
 	_c(pTimeObj)->setProperty(pTimeObj, NCSP_WIDGET_TEXT, (DWORD)time_info);
 
@@ -1864,7 +1864,7 @@ static BOOL onTimer(mWidget *widget, int message, int id, DWORD tick)
 	uint32_t t_value = (WPARAM)second * play_trk_props[1].value / total_time;
 	uint32_t tmp_value = _c(pProgressObj)->getProperty(pProgressObj, NCSP_TRKBAR_CURPOS);
 
-    //ÖØ»æ²¥·Å½ø¶ÈÌõ
+    //ï¿½Ø»æ²¥ï¿½Å½ï¿½ï¿½ï¿½ï¿½ï¿½
 	if (g_jumpflag == TRUE) {
 		g_jumpflag = FALSE;
 		_c(pProgressObj)->setProperty(pProgressObj, NCSP_TRKBAR_CURPOS, tmp_value);
@@ -1872,7 +1872,7 @@ static BOOL onTimer(mWidget *widget, int message, int id, DWORD tick)
 	else
 		_c(pProgressObj)->setProperty(pProgressObj, NCSP_TRKBAR_CURPOS, t_value);
 
-    //ÏÔÊ¾ÊÓÆµÊµ¼Ê²¥·ÅÖ¡ÂÊ
+    //ï¿½ï¿½Ê¾ï¿½ï¿½ÆµÊµï¿½Ê²ï¿½ï¿½ï¿½Ö¡ï¿½ï¿½
 	if (g_pstPlayStat->paused) 
 		sprintf(fpsstr, "%.1f", 0.0);
 	else

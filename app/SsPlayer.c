@@ -44,7 +44,7 @@
 #include "mi_panel_datatype.h"
 
 #ifdef CHIP_IS_SSD20X
-#include "SAT070CP50_1024x600.h"
+#include "ST7703_720X1280_MIPI.h"
 #endif
 
 #ifdef ST_DEFAULT_SOC_ID
